@@ -1,0 +1,60 @@
+{% extends 'shop/basic.html' %}
+
+{% block title %} Contact Us{% endblock %}
+{% block body %}
+
+<div class="container">
+    <h3> Contact Us</h3>
+    <form action="/shop/contact/" method="post" id="contactForm">{% csrf_token %}
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Your Name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter Your Phone Number" required>
+        </div>
+        <div class="form-group">
+            <label for="desc">How May We Help You?</label>
+            <textarea class="form-control" id="desc" name="desc" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form submission
+    var requiredFields = ['name', 'email', 'phone', 'desc'];
+    var allFieldsFilled = true;
+
+    requiredFields.forEach(function(fieldId) {
+        var field = document.getElementById(fieldId);
+        if (field.value.trim() === '') {
+            allFieldsFilled = false;
+            field.classList.add('is-invalid');
+        } else {
+            field.classList.remove('is-invalid');
+        }
+    });
+
+    if (allFieldsFilled) {
+        // Show thank you message
+        alert('Thank you for contacting us!');
+        // Redirect to home page
+        window.location.href = "/shop";
+        // Optionally, submit the form after the alert
+        // this.submit();
+    } else {
+        alert('Please fill out all required fields.');
+    }
+});
+</script>
+{% endblock %}
