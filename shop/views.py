@@ -1,7 +1,7 @@
 import json
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from .models import Product, Contact, Place_Orders, OrderUpdate
+from .models import Contact, Place_Orders, OrderUpdate, Product
 from math import ceil
 import logging
 
